@@ -14,6 +14,7 @@ export async function GET(req: NextRequest) {
     const heading = searchParams.get("heading");
     const url = searchParams.get("url");
     const footer = searchParams.get("footer");
+    const desc = searchParams.get("desc");
 
     if (!title) {
       return new Response("No title found", { status: 500 });
@@ -31,6 +32,12 @@ export async function GET(req: NextRequest) {
       return new Response("No footer found", { status: 500 });
     }
 
+    if (!desc) {
+      return new Response("No desc found", { status: 500 });
+    }
+
+    const Tdesc = desc.length > 300 ? `${desc.substring(0, 300)}...` : desc;
+
     const Theading =
       title.length > 140 ? `${title.substring(0, 140)}...` : title;
     return new ImageResponse(
@@ -41,6 +48,9 @@ export async function GET(req: NextRequest) {
           </div>
           <div tw="flex flex-col flex-1 py-10">
             <div tw="flex text-[80px] font-bold text-[50px]">{Theading}</div>
+            <p tw="flex text-[40px] font-semibold text-zinc-700 text-[25px]">
+              {Tdesc}
+            </p>
           </div>
           <div tw="flex items-center w-full justify-between">
             <div tw="flex text-xl">{url}</div>
