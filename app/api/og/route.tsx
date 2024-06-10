@@ -1,8 +1,6 @@
 import { NextRequest } from "next/server";
 import { ImageResponse } from "next/og";
 
-
-
 export const runtime = "edge";
 const interBold = fetch(
   new URL("../../../assets/fonts/GeistMono-Bold.ttf", import.meta.url)
